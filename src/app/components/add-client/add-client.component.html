@@ -1,3 +1,77 @@
-<p>
-  add-client works!
-</p>
+<!-- Back button -->
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/" href="#" class="btn btn-primary"><i class="fa fa-arrow-circle-o-left"></i> Back To Dashboard</a>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>
+<br>
+
+<!-- Add Client Form -->
+<div class="card">
+  <div class="card-header">
+    Add Client
+  </div>
+  <br>
+  <div class="card-block ml-3">
+    <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <!-- First Name Field -->
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" [(ngModel)]="client.firstName" name="firstName"
+          #clientFirstName="ngModel" minlength="2" required>
+      </div>
+      <div *ngIf="clientFirstName.hasError('required') && clientFirstName.touched" class="alert alert-danger">
+        First Name is required
+      </div>
+      <div *ngIf="clientFirstName.hasError('minlength') && clientFirstName.touched" class="alert alert-danger">
+        Must be at least 2 characters
+      </div>
+
+      <!-- Last Name Field -->
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" [(ngModel)]="client.lastName" name="lastName"
+          #clientLastName="ngModel" minlength="2" required>
+      </div>
+      <div *ngIf="clientLastName.hasError('required') && clientLastName.touched" class="alert alert-danger">
+        Last Name is required
+      </div>
+      <div *ngIf="clientLastName.hasError('minlength') && clientLastName.touched" class="alert alert-danger">
+        Must be at least 2 characters
+      </div>
+
+      <!-- Email Address Field -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" class="form-control" [(ngModel)]="client.email" name="email"
+          #clientEmail="ngModel" required>
+      </div>
+      <div *ngIf="clientEmail.hasError('required') && clientEmail.touched" class="alert alert-danger">
+        Email Address is required
+      </div>
+
+      <!-- Phone Number Field -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" class="form-control" [(ngModel)]="client.phone" name="phone"
+          #clientPhone="ngModel" minlength="10">
+      </div>
+      <div *ngIf="clientPhone.hasError('minlength') && clientPhone.dirty" class="alert alert-danger">
+        Enter a valid phone number
+      </div>
+
+      <!-- Balance Field -->
+      <div class="form-group">
+        <label for="balance">Balance</label>
+        <input type="text" class="form-control" [(ngModel)]="client.balance" name="balance" #clientBalance="ngModel"
+          [disabled]="disableBalanceOnAdd">
+      </div>
+
+      <!-- Submit Button -->
+      <input type="submit" class="btn btn-primary btn-block" value="Submit">
+    </form>
+  </div>
+</div>
