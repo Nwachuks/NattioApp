@@ -34,7 +34,9 @@ const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'add-client', component: AddClientComponent }
+  { path: 'add-client', component: AddClientComponent },
+  { path: 'client/:id', component: ClientDetailsComponent },
+  { path: 'edit-client/:id', component: EditClientComponent }
 ];
 
 // Configure Firebase
@@ -67,8 +69,8 @@ export const firebaseConfig = {
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseConfig),
     FlashMessagesModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],

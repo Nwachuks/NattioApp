@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Client } from '../models/Client';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  clientele: AngularFireList<any>;
+  clientele: AngularFireList<Client>;
   clients: Observable<Client[]>;
+
+  dclient: AngularFireObject<Client>;
   client: Observable<Client>;
 
   constructor(public afd: AngularFireDatabase) {
@@ -29,5 +31,22 @@ export class ClientService {
 
   newClient(client: Client) {
     this.clientele.push(client);
+  }
+
+  getClient(id: string) {
+    this.dclient = this.afd.object('/clients/' + id);
+    this.client = this.dclient.valueChanges();
+    // this.dclient.snapshotChanges().subscribe(action => {
+    //   console.log(action.type);
+    // });
+    return this.client;
+  }
+
+  updateClient(id: string, client: Client) {
+    return this.clientele.update(id, client);
+  }
+
+  deleteClient(id: string) {
+    return this.clientele.remove(id);
   }
 }

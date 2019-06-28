@@ -15,8 +15,18 @@
     Add Client
   </div>
   <br>
-  <div class="card-block ml-3">
+  <div class="card-block ml-3 mr-3 mb-3">
     <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <!-- ID Field -->
+      <div class="form-group">
+        <label for="id">Sequential ID</label>
+        <input type="text" class="form-control m" [(ngModel)]="client.id" name="id"
+          #clientId="ngModel" required>
+      </div>
+      <div *ngIf="clientId.hasError('required') && clientFirstName.touched" class="alert alert-danger">
+        Sequential ID is highly required
+      </div>
+
       <!-- First Name Field -->
       <div class="form-group">
         <label for="firstName">First Name</label>
@@ -75,3 +85,14 @@
     </form>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
